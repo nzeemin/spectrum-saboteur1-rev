@@ -2294,7 +2294,7 @@ L8D5C:	DEFW	LB483	; Room procedure
 	DEFB	$05,$03,$03,$A0,$71,$FC,$70	; Block 3x3 tiles from 71A0 to $70FC
 	DEFB	$05,$03,$03,$A0,$71,$FF,$70	; Block 3x3 tiles from 71A0 to $70FF
 	DEFB	$05,$03,$03,$A0,$71,$03,$71	; Block 3x3 tiles from 71A0 to $7103
-	DEFB	$01,$01,$FF,$64,$66	; Fill vert 1 tiles with $FF at $6664
+L8DBB:	DEFB	$01,$01,$FF,$64,$66	; Fill vert 1 tiles with $FF at $6664
 	DEFB	$0E,$2A,$78,$70		; Put tile $2A at $7078
 	DEFB	$01,$06,$2B,$96,$70	; Fill vert 6 tiles with $2B at $7096
 	DEFB	$FF	; End of sequence
@@ -2323,7 +2323,7 @@ L8DCA:	DEFW	LB41F	; Room procedure
 	DEFB	$05,$01,$02,$63,$8E,$06,$67	; Block 1x2 tiles from 8E63 to $6706
 	DEFB	$05,$03,$08,$78,$8E,$71,$66	; Block 3x8 tiles from 8E78 to $6671
 	DEFB	$02,$11,$D4,$2C,$66	; Fill horz 17 tiles with $D4 at $662C
-L8DBB:	DEFB	$05,$01,$02,$65,$8E,$34,$66	; Block 1x2 tiles from 8E65 to $6634
+	DEFB	$05,$01,$02,$65,$8E,$34,$66	; Block 1x2 tiles from 8E65 to $6634
 	DEFB	$05,$03,$04,$90,$8E,$56,$66	; Block 3x4 tiles from 8E90 to $6656
 	DEFB	$03,$1B,$04,$04,$8B,$66	; Rectangle 4x4 tiles with $1B at $668B
 	DEFB	$FF	; End of sequence
@@ -6740,8 +6740,8 @@ LBBF3:	INC HL
 	ADD A,A
 	ADD A,A		; * 8
 	ADD A,$C1
-	LD (LBC06),A
-LBC06:	SET 1,C
+	LD (LBC05+1),A
+LBC05:	SET 1,C
 LBC07:	DJNZ LBBF3
 	LD A,C
 	POP BC
@@ -6755,7 +6755,7 @@ LBC0D:	LD SP,$6257	; !!MUT-ARG!!
 	EXX
 ; Entry point
 LBC13:	LD HL,LE5DC	; Melody start address
-	LD (LE442),HL	; set melody current address
+	LD (LE440+2),HL	; set melody current address
 	LD HL,$4000
 	LD BC,$1000
 	LD DE,$4001
@@ -7374,7 +7374,7 @@ LC1B6:	LD A,(L9C41)	; get Ninja X
 	ADD HL,DE
 	LD (L9C42),HL	; set Ninja position in tilemap
 	JR LC20D
-LC1DA:	LD DE,$FFE3	-29
+LC1DA:	LD DE,$FFE3	; -29
 	ADD HL,DE
 	LD A,$64
 	CP (HL)
@@ -9547,8 +9547,6 @@ LE48A:	DEC BC
 	JR NZ,LE48A
 	LD DE,$0002
 	JR LE468
-
-LE442:	;STUB
 
 ; Table for melodies
 LE494:	DEFW LE4AE
